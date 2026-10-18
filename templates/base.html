@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07111b">
+<title>{% block title %}Fondation SCP{% endblock %} — Secure. Contain. Protect.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="topline"><span>● SYSTÈME OPÉRATIONNEL</span><span>RÉSEAU DE LA FONDATION // FR</span><span>ACCÈS PUBLIC</span></div>
+<header class="site-header wrap">
+<a class="brand" href="{{ url_for('home') }}"><span class="brand-mark">⛨</span><span><b>SCP FOUNDATION</b><small>SECURE. CONTAIN. PROTECT.</small></span></a>
+<button class="menu-toggle" aria-label="Ouvrir le menu" onclick="document.querySelector('.nav').classList.toggle('open')">☰</button>
+<nav class="nav">
+<a href="{{ url_for('home') }}">Accueil</a><a href="{{ url_for('archives') }}">Archives</a>
+{% for s in sections %}<a href="{{ url_for('section_page', section=s) }}">{{ s }}</a>{% endfor %}
+{% if is_admin %}<a class="nav-admin" href="{{ url_for('dashboard') }}">◈ Studio</a><a href="{{ url_for('logout') }}">Déconnexion</a>{% else %}<a href="{{ url_for('login') }}">Accès éditeur</a>{% endif %}
+</nav>
+</header>
+<main class="wrap main">
+{% with messages = get_flashed_messages(with_categories=true) %}{% if messages %}<div class="flashes">{% for category, message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}</div>{% endif %}{% endwith %}
+{% block content %}{% endblock %}
+</main>
+<footer class="footer"><div class="wrap footer-inner"><span>⛨ SCP FOUNDATION</span><span>Univers fictif · Maquette non officielle</span><span>SECURE // CONTAIN // PROTECT</span></div></footer>
+<script>
+document.querySelectorAll('[data-confirm]').forEach(el=>el.addEventListener('click',e=>{if(!confirm(el.dataset.confirm))e.preventDefault()}));
+</script>
+</body></html>

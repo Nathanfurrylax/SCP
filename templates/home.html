@@ -1,0 +1,16 @@
+{% extends "base.html" %}{% block title %}Accueil{% endblock %}{% block content %}
+<section class="hero">
+<div class="hero-image"></div><div class="hero-copy"><div class="eyebrow"><span class="pulse"></span> ARCHIVES DE LA FONDATION · CONSULTATION</div><h1>La vérité est<br><em>sous confinement.</em></h1><p>Des anomalies. Des secrets. Des vérités que le monde ne doit jamais découvrir. Explore les archives et les rapports de la Fondation.</p><div class="actions"><a class="btn primary" href="{{ url_for('archives') }}">Explorer les archives ↗</a><a class="btn ghost" href="{{ url_for('section_page', section='Dossiers SCP') }}">Dossiers SCP</a></div></div>
+<div class="alert-card"><span class="alert-icon">!</span><div><b>AVIS DE SÉCURITÉ</b><small>Les documents sont fictifs. Certains rapports peuvent contenir des thèmes d'horreur.</small><strong>STATUT : SURVEILLÉ</strong></div></div>
+<div class="hero-bottom"><span>TERMINAL WEB // 01</span><span>COORDONNÉES CLASSIFIÉES</span><span>DERNIÈRE SYNCHRONISATION : ACTIVE</span></div>
+</section>
+<section class="section-block"><div class="section-heading"><div><div class="eyebrow">EXPLORER</div><h2>Départements de la Fondation</h2></div><span class="muted">05 SECTIONS</span></div>
+<div class="department-grid">
+{% set dept = [('◉','Dossiers SCP','Entités, objets et phénomènes anormaux.','01'),('⚠','Rapports d’incident','Brèches, anomalies et comptes rendus.','02'),('⌁','Journaux de recherche','Notes et observations scientifiques.','03'),('▤','Histoires','Témoignages et récits du personnel.','04'),('◈','Annonces','Communications de la Fondation.','05')] %}
+{% for icon,name,desc,num in dept %}<a class="department" href="{{ url_for('section_page', section=name.replace('’',"'")) }}"><span class="dept-num">{{ num }}</span><span class="dept-icon">{{ icon }}</span><h3>{{ name }}</h3><p>{{ desc }}</p><span class="dept-link">OUVRIR LE DOSSIER ↗</span></a>{% endfor %}
+</div></section>
+<section class="section-block"><div class="section-heading"><div><div class="eyebrow">TRANSMISSIONS RÉCENTES</div><h2>Dernières publications</h2></div><a class="text-link" href="{{ url_for('archives') }}">Toutes les archives →</a></div>
+<div class="post-grid">{% for post in posts %}<a class="post-card" href="{{ url_for('article', post_id=post.id) }}"><div class="post-art">{% if post.image %}<img src="{{ post.image }}" alt="">{% else %}<span>⛨</span>{% endif %}<i>DOCUMENT {{ "%04d"|format(post.id) }}</i></div><div class="post-info"><span class="tag">{{ post.section }}</span><h3>{{ post.title }}</h3><p>{{ post.content|striptags|truncate(115) }}</p><small>{{ post.created_at }}</small></div></a>{% else %}<p>Aucun article publié pour le moment.</p>{% endfor %}</div>
+</section>
+<div class="quote-panel"><span>“</span><div><p>Nous ne sommes pas ici pour comprendre l'inconnu à tout prix. Nous sommes ici pour empêcher l'inconnu de nous comprendre.</p><small>— ARCHIVES INTERNES DE LA FONDATION · CITATION FICTIVE</small></div></div>
+{% endblock %}

@@ -1,0 +1,3 @@
+{% extends "base.html" %}{% block title %}Accès éditeur{% endblock %}{% block content %}
+<div class="auth-card"><div class="auth-emblem">⛨</div><div class="eyebrow">AUTHENTIFICATION REQUISE</div><h1>Accès au studio</h1><p>La modification et la publication sont réservées aux deux identifiants Discord configurés par l'administrateur.</p>{% if setup_missing %}<div class="flash error">La connexion Discord n'est pas encore configurée. Suis le guide README, puis renseigne le fichier .env.</div>{% else %}<a class="btn primary wide" href="{{ url_for('login') }}">Continuer avec Discord</a>{% endif %}<small>Les visiteurs n'ont pas besoin de se connecter pour lire les articles publiés.</small></div>
+{% endblock %}
