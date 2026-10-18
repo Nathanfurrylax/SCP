@@ -1,0 +1,7 @@
+.env
+venv/
+__pycache__/
+*.pyc
+scp_site.db
+static/uploads/*
+!static/uploads/.gitkeep
