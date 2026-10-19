@@ -77,3 +77,11 @@ python app.py
 - Les articles sont affichés en Markdown. Le rendu utilise l'extension Markdown standard et n'autorise pas les fichiers HTML bruts par défaut.
 - Les données de démonstration sont fictives.
 - Ce projet est un site de fan non officiel, non affilié à la SCP Foundation. Vérifie les licences et règles de crédit applicables aux contenus et images que tu publies.
+
+## Déploiement sur Render (mis à jour)
+
+1. Pousse le projet sur GitHub, puis crée un **Blueprint** Render (le fichier `render.yaml` configure tout) ou un Web Service manuel.
+2. Commande de démarrage : `gunicorn app:app --workers 1 --threads 4 --bind 0.0.0.0:$PORT` ; health check : `/healthz`.
+3. Variables : `FLASK_SECRET_KEY`, `DISCORD_CLIENT_ID`, `DISCORD_CLIENT_SECRET`, `DISCORD_REDIRECT_URI` (identique au Redirect URI du portail Discord, en HTTPS), `ADMIN_DISCORD_IDS`, `DATA_DIR=/var/data`.
+4. **Disque persistant** monté sur `/var/data` : sans lui (plan gratuit), la base SQLite et les images sont effacées à chaque redéploiement.
+5. Les images sont servies via `/media/…` ; les anciens liens `/static/uploads/…` restent compatibles.

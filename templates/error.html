@@ -1,0 +1,1 @@
+{% extends "base.html" %}{% block title %}Erreur {{ code }}{% endblock %}{% block content %}<div class="auth-card"><div class="auth-emblem red">{{ code }}</div><div class="eyebrow">INCIDENT SYSTÈME</div><h1>Une anomalie est survenue</h1><p>{{ message }}</p><a class="btn primary wide" href="{{ url_for('home') }}">Retour à l'accueil</a></div>{% endblock %}

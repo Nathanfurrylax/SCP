@@ -3,8 +3,10 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#07111b">
+{% block meta %}<meta name="description" content="Archives fictives de la Fondation SCP : dossiers, rapports d'incident, journaux de recherche et histoires.">{% endblock %}
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>⛨</text></svg>">
 <title>{% block title %}Fondation SCP{% endblock %} — Secure. Contain. Protect.</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
@@ -12,7 +14,7 @@
 <div class="topline"><span>● SYSTÈME OPÉRATIONNEL</span><span>RÉSEAU DE LA FONDATION // FR</span><span>ACCÈS PUBLIC</span></div>
 <header class="site-header wrap">
 <a class="brand" href="{{ url_for('home') }}"><span class="brand-mark">⛨</span><span><b>SCP FOUNDATION</b><small>SECURE. CONTAIN. PROTECT.</small></span></a>
-<button class="menu-toggle" aria-label="Ouvrir le menu" onclick="document.querySelector('.nav').classList.toggle('open')">☰</button>
+<button class="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false" onclick="var n=document.querySelector('.nav');this.setAttribute('aria-expanded',n.classList.toggle('open'))">☰</button>
 <nav class="nav">
 <a href="{{ url_for('home') }}">Accueil</a><a href="{{ url_for('archives') }}">Archives</a>
 {% for s in sections %}<a href="{{ url_for('section_page', section=s) }}">{{ s }}</a>{% endfor %}
